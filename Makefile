@@ -10,6 +10,12 @@
 # edits to this file. Build a non-default target with `make TARGET=<plat>`
 # (in practice via the tools/build-<plat>.sh Docker wrappers).
 
+# Pin the default goal. The first rule in this file is $(DIST) (the mkdir),
+# and GNU make takes the FIRST target as the default — so a bare `make`
+# (or `make TARGET=<plat>`) would create an empty dist/ and exit 0 without
+# building anything. Keep this above the first rule.
+.DEFAULT_GOAL := all
+
 CC       ?= cc
 SDL2_CFG ?= sdl2-config
 
